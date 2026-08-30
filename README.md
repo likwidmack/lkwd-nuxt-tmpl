@@ -1,12 +1,8 @@
 # lkwd-nuxt-tmpl
 
-Likwid **Nuxt 4** GitHub template: Pug, SCSS, house tooling, HyperActivity-style `SYS_ENV`, Vitest, Playwright, and dual agent surfaces (Cursor + Codex).
+Likwid **Nuxt 4** GitHub template: Pug, SCSS, house tooling, `SYS_ENV` matrix, Vitest, Playwright, and dual agent surfaces.
 
-## Use this template
-
-1. On GitHub: **Use this template** → create a new repository (or clone this repo).
-2. Enable **Template repository** in GitHub → Settings → General (one-time for this source repo).
-3. Locally:
+## Quick start
 
 ```bash
 cp .env.local.example .env.local
@@ -16,52 +12,22 @@ npm run dev
 
 Open the URL Nuxt prints (default `http://127.0.0.1:3000`).
 
-## Scripts
+## Documentation
 
-| Script                      | Purpose                                         |
-| --------------------------- | ----------------------------------------------- |
-| `npm run dev`               | Dev server (`.env.local`)                       |
-| `npm run lint` / `lint:fix` | ESLint + Prettier                               |
-| `npm run typecheck`         | `nuxt typecheck`                                |
-| `npm test`                  | Vitest unit tests                               |
-| `npm run test:e2e`          | Playwright smoke (builds + previews `.env.e2e`) |
-| `npm run regression:ci`     | Lint + typecheck + unit + `build:test`          |
+The root README is the GitHub landing page only. Topic docs live under [`docs/`](docs/README.md):
 
-## Env matrix
-
-| Variable                          | Values                                  |
-| --------------------------------- | --------------------------------------- |
-| `SYS_ENV`                         | `local` \| `image` \| `server`          |
-| `NUXT_PUBLIC_APP_ENV` / lifecycle | `development` \| `test` \| `production` |
-
-Helpers: `shared/utils/runtimeEnvironment.ts`.
+| Topic                   | Path                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| Docs catalog            | [`docs/README.md`](docs/README.md)                                               |
+| CI/CD and branch policy | [`docs/engineering/cicd.md`](docs/engineering/cicd.md)                           |
+| Git collaboration       | [`docs/engineering/git-collaboration.md`](docs/engineering/git-collaboration.md) |
+| Optional overlays       | [`docs/overlays/`](docs/overlays/)                                               |
+| Requirements plan       | [`docs/plans/`](docs/plans/)                                                     |
 
 ## Agent guidance
 
-- Canonical shared policy: [`.agent/AGENTS.md`](./.agent/AGENTS.md) (index: [`.agent/README.md`](./.agent/README.md))
-- Universal stub (widely auto-loaded): [`AGENTS.md`](./AGENTS.md)
-- Cursor: [`.cursor/rules/`](./.cursor/rules/)
-- Codex: [`.codex/`](./.codex/)
-- Claude-compatible stub: [`CLAUDE.md`](./CLAUDE.md)
-
-## Optional overlays
-
-Off by default. Enable only when a project needs them:
-
-- [PrimeVue](docs/overlays/primevue.md)
-- [Content + Image + i18n](docs/overlays/content-image-i18n.md)
-- [PWA](docs/overlays/pwa.md)
-- [AWS deploy (primary recipe)](docs/overlays/aws.md)
-- [Docker stubs](docs/overlays/docker.md)
-
-See also [`overlays/README.md`](overlays/README.md).
-
-## GitHub template checklist
-
-- [ ] Push this repo to GitHub
-- [ ] Settings → General → check **Template repository**
-- [ ] Protect `main` as desired; CI runs on PRs to `main` / `development`
-- [ ] Replace this README’s product name when cloning for a real app
+- Canonical policy: [`.agent/AGENTS.md`](.agent/AGENTS.md)
+- Stub: [`AGENTS.md`](AGENTS.md) · Cursor: [`.cursor/rules/`](.cursor/rules/) · Codex: [`.codex/`](.codex/)
 
 ## Requirements
 

@@ -25,6 +25,8 @@
     "test:e2e": "playwright test",
     "regression:static": "npm run lint && npm run typecheck && npm run test:unit",
     "regression:ci": "npm run regression:static && npm run build:test",
+    "gh:setup-merge-settings": "node scripts/setup-github-merge-settings.mjs",
+    "gh:setup-rulesets": "node scripts/setup-github-rulesets.mjs",
     "postinstall": "nuxt prepare",
     "prepare": "node .husky/install.mjs"
   },

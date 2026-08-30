@@ -1,0 +1,54 @@
+# Fail the run if main or development was updated without a pull request.
+# Prefer GitHub rulesets to block the push itself when the plan allows them.
+name: Branch policy
+
+on:
+  push:
+    branches:
+      - main
+      - development
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  require-pull-request:
+    name: Require pull request
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Reject unprotected direct pushes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pulls } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+            });
+            const branch = context.ref.replace('refs/heads/', '');
+            const merged = pulls.filter((pull) => Boolean(pull.merged_at));
+            const openInbound = pulls.filter(
+              (pull) =>
+                !pull.merged_at &&
+                (pull.base.ref === 'main' || pull.base.ref === 'development'),
+            );
+
+            // Allow: merged PR, or commit already on an open PR into main/development
+            // (so promoting development→main does not fail while the PR is open).
+            if (merged.length === 0 && openInbound.length === 0) {
+              core.setFailed(
+                `Direct pushes to ${branch} are not allowed. Open a pull request.`,
+              );
+              return;
+            }
+
+            if (branch === 'main') {
+              const fromDevelopment = merged.some(
+                (pull) => pull.base.ref === 'main' && pull.head.ref === 'development',
+              );
+              if (!fromDevelopment) {
+                core.setFailed('main only accepts merged pull requests from development.');
+              }
+            }

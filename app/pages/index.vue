@@ -13,7 +13,7 @@ main.page
     p.eyebrow lkwd-nuxt-tmpl
     h1 House Nuxt template
     p.lede
-      | Pug + SCSS starter with house tooling, HyperActivity-style SYS_ENV, Playwright, and dual agent surfaces.
+      | Pug + SCSS starter with house tooling, SYS_ENV matrix, Playwright, and dual agent surfaces.
     dl.meta
       dt SYS_ENV
       dd {{ config.public.sysEnv }}

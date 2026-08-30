@@ -16,4 +16,4 @@ npm install @nuxt/content @nuxt/image @nuxtjs/i18n
 
 ## Notes
 
-- Shared across portfolio and HyperActivity; still optional for thin clones.
+- Useful for content sites; still optional for thin clones.

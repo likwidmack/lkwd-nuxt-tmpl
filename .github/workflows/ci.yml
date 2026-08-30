@@ -1,4 +1,5 @@
-# CI — quality gates for pull requests
+# PR CI — lint, typecheck, unit, build, e2e.
+# CD overlays stay optional (see docs/overlays/aws.md).
 name: CI
 
 on:
@@ -6,21 +7,33 @@ on:
     branches:
       - main
       - development
-  push:
-    branches:
-      - main
-      - development
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
+  branch-policy:
+    name: Branch policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require development-only promotions to main
+        run: |
+          set -euo pipefail
+          base="${{ github.base_ref }}"
+          head="${{ github.head_ref }}"
+          if [ "$base" = "main" ] && [ "$head" != "development" ]; then
+            echo "PRs into main are allowed only from development (got head branch '$head')."
+            exit 1
+          fi
+
   quality:
-    name: Lint, typecheck, unit, build
+    name: Regression / test
+    needs: branch-policy
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
