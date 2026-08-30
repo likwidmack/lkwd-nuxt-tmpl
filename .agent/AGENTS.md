@@ -35,6 +35,7 @@ Use HyperActivity-style naming:
 - Shared agent policy: `.agent/` (this tree)
 - Optional enablement: `docs/overlays/` and `overlays/`
 - Requirements plan: `docs/plans/`
+- Root `README.md` is the GitHub landing page only — index topics in `docs/README.md`
 
 ## Agent surfaces
 
