@@ -17,6 +17,7 @@ data
 .env.production
 .env.image.test
 !.env*.example
+.env*.local
 
 # Logs / coverage / test artifacts
 *.log

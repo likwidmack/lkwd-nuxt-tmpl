@@ -32,3 +32,7 @@ The root README is the GitHub landing page only. Topic docs live under [`docs/`]
 ## Requirements
 
 Node `>=26.5.0` (see `.nvmrc`). npm is the package manager.
+
+## Security
+
+Public template: no secrets in git. See [`SECURITY.md`](SECURITY.md). Copy `.env*.example` files only; never commit real `.env` or TLS materials.
