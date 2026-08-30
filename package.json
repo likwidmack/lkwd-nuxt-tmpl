@@ -1,0 +1,56 @@
+{
+  "name": "lkwd-nuxt-tmpl",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Likwid Nuxt 4 GitHub template — Pug, SCSS, house tooling, dual agent surfaces.",
+  "engines": {
+    "node": ">=26.5.0"
+  },
+  "scripts": {
+    "build": "npm run build:local",
+    "build:local": "nuxt build --dotenv .env.local",
+    "build:test": "nuxt build --dotenv .env.test",
+    "build:e2e": "nuxt build --dotenv .env.e2e",
+    "dev": "nuxt dev --dotenv .env.local",
+    "preview": "nuxt preview --dotenv .env.local",
+    "preview:e2e": "nuxt preview --dotenv .env.e2e",
+    "lint": "eslint . && prettier . --check",
+    "lint:fix": "prettier . --write && eslint . --fix",
+    "lint:staged": "lint-staged",
+    "typecheck": "nuxt typecheck",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "regression:static": "npm run lint && npm run typecheck && npm run test:unit",
+    "regression:ci": "npm run regression:static && npm run build:test",
+    "postinstall": "nuxt prepare",
+    "prepare": "node .husky/install.mjs"
+  },
+  "dependencies": {
+    "nuxt": "^4.5.0",
+    "pug": "^3.0.4",
+    "sass": "^1.101.7"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.16.0",
+    "@playwright/test": "^1.62.1",
+    "@prettier/plugin-pug": "^3.4.2",
+    "eslint": "^10.8.0",
+    "happy-dom": "^20.11.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.2.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.10",
+    "vue-eslint-parser-template-tokenizer-pug": "^1.0.0",
+    "vue-tsc": "^3.3.8"
+  },
+  "packageManager": "npm@11.10.1",
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown",
+    "*.{js,mjs,cjs,ts,vue}": "eslint --fix"
+  }
+}

@@ -1,0 +1,18 @@
+# Optional CD stub — copy to .github/workflows/ when AWS overlay is enabled.
+# Not active in the always-on template CI.
+name: CD AWS (stub)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Overlay not configured
+        run: |
+          echo "Copy and adapt this stub after enabling docs/overlays/aws.md"
+          exit 1

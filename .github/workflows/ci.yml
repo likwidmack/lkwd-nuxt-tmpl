@@ -1,0 +1,84 @@
+# CI — quality gates for pull requests
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - development
+  push:
+    branches:
+      - main
+      - development
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Lint, typecheck, unit, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HUSKY: '0'
+      NUXT_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+      SYS_ENV: server
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync env profiles for CI
+        run: |
+          cp .env.test.example .env.test
+          cp .env.e2e.example .env.e2e
+          cp .env.local.example .env.local
+
+      - name: Regression (static + build)
+        run: npm run regression:ci
+
+  e2e:
+    name: Playwright e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: quality
+    env:
+      HUSKY: '0'
+      NUXT_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync env profiles
+        run: |
+          cp .env.e2e.example .env.e2e
+          cp .env.local.example .env.local
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Run e2e
+        run: npm run test:e2e

@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Stub SAM template for lkwd-nuxt-tmpl (optional overlay — not active by default).
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: test
+
+Resources:
+  NuxtFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'lkwd-nuxt-${EnvironmentName}'
+      Runtime: nodejs22.x
+      Handler: index.handler
+      Timeout: 30
+      MemorySize: 512
+      # Replace with Nitro aws-lambda output packaging when enabling this overlay.
+
+Outputs:
+  FunctionName:
+    Value: !Ref NuxtFunction

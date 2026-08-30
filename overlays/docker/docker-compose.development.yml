@@ -1,0 +1,17 @@
+# Optional Docker Compose stub — copy to docker/ when enabling docs/overlays/docker.md
+services:
+  web:
+    image: node:26.5.0-bookworm
+    working_dir: /app
+    volumes:
+      - ../:/app
+    ports:
+      - '3000:3000'
+    environment:
+      SYS_ENV: image
+      NODE_ENV: development
+      NUXT_PUBLIC_APP_ENV: development
+      NUXT_PUBLIC_DEPLOYMENT_TARGET: docker
+      HOST: 0.0.0.0
+      PORT: 3000
+    command: npm run dev

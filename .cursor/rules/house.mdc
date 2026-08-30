@@ -1,0 +1,14 @@
+---
+description: House conventions for this Nuxt template
+alwaysApply: true
+---
+
+# lkwd-nuxt-tmpl Cursor rules
+
+Follow [`.agent/AGENTS.md`](../../.agent/AGENTS.md) as the canonical shared policy. Root [`AGENTS.md`](../../AGENTS.md) is only a stub that points there.
+
+- Nuxt 4, TypeScript strict, Pug templates, SCSS styles
+- Node 26+; npm; HyperActivity-style `SYS_ENV` (`local` | `image` | `server`)
+- Vitest + Playwright always-on; optional overlays stay off unless requested
+- Exhaustive switches on unions; no inline imports
+- Edit `.agent/AGENTS.md` first when changing policy; keep `.codex/` aligned
