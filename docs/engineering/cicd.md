@@ -19,10 +19,10 @@ push → main|development → Branch policy workflow (reject direct pushes)
 
 ## Workflows
 
-| Workflow                              | Purpose                                              |
-| ------------------------------------- | ---------------------------------------------------- |
-| `.github/workflows/ci.yml`            | PR CI: branch gate + `regression:ci` + Playwright    |
-| `.github/workflows/branch-policy.yml` | Reject direct pushes; `main` only from `development` |
+| Workflow                              | Purpose                                                                                                                                                                       |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.github/workflows/ci.yml`            | PR CI: branch gate + `regression:ci` + Playwright                                                                                                                             |
+| `.github/workflows/branch-policy.yml` | Reject unprotected direct pushes; `main` only from merged `development` PRs. Commits already on an open PR into `main`/`development` are allowed so promotion PRs stay green. |
 
 Required check **names** (rulesets / UI) must match job `name:` fields:
 
