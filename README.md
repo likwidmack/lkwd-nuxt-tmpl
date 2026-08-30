@@ -1,6 +1,6 @@
 # lkwd-nuxt-tmpl
 
-Likwid **Nuxt 4** GitHub template: Pug, SCSS, house tooling, HyperActivity-style `SYS_ENV`, Vitest, Playwright, and dual agent surfaces.
+Likwid **Nuxt 4** GitHub template: Pug, SCSS, house tooling, `SYS_ENV` matrix, Vitest, Playwright, and dual agent surfaces.
 
 ## Quick start
 

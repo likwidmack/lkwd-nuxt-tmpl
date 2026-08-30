@@ -6,9 +6,9 @@ Root [`AGENTS.md`](../AGENTS.md) is a short universal stub so tools that only au
 
 ## Product
 
-`lkwd-nuxt-tmpl` is a thin Nuxt 4 GitHub template: Pug, SCSS, house tooling, HyperActivity-style `SYS_ENV`, Vitest, Playwright, and optional overlays (PrimeVue, Content/Image/i18n, PWA, AWS).
+`lkwd-nuxt-tmpl` is a thin Nuxt 4 GitHub template: Pug, SCSS, house tooling, `SYS_ENV` matrix, Vitest, Playwright, and optional overlays (PrimeVue, Content/Image/i18n, PWA, AWS).
 
-Do not import product/strategy content from HyperActivity or portfolio apps into clones.
+Do not import product/strategy content from other apps into clones.
 
 ## Stack conventions
 
@@ -21,7 +21,7 @@ Do not import product/strategy content from HyperActivity or portfolio apps into
 
 ## Env matrix
 
-Use HyperActivity-style naming:
+Use house env naming:
 
 - `SYS_ENV`: `local` | `image` | `server`
 - Node lifecycle / `NUXT_PUBLIC_APP_ENV`: `development` | `test` | `production`

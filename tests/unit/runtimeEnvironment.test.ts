@@ -20,7 +20,7 @@ describe('runtimeEnvironment', () => {
     expect(nitroPresetFor('server')).toBe('aws-lambda');
   });
 
-  it('resolves HyperActivity-style env matrix', () => {
+  it('resolves house env matrix', () => {
     const resolved = resolveRuntimeEnvironment({
       SYS_ENV: 'image',
       NUXT_PUBLIC_APP_ENV: 'test',
