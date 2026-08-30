@@ -12,10 +12,10 @@ Commit and PR conventions for this template. Workflow topology: [cicd.md](cicd.m
 
 ## Branches
 
-| Branch        | Role                                                           |
-| ------------- | -------------------------------------------------------------- |
-| `development` | Integration branch for feature PRs                             |
-| `main`        | Stable / template default; accepts PRs from `development` only |
+| Branch        | Role                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------ |
+| `development` | Default branch; integration for feature PRs (**rebase** merge)                       |
+| `main`        | Protected promotion target; **PR only** from `development` (**squash** / auto-merge) |
 
 ## Commits
 
@@ -23,17 +23,20 @@ Use Conventional Commits. Commit only when asked. Do not put `[skip ci]` tokens 
 
 ## Pull requests
 
-| Base          | Head               | Merge  | Checks                                                 |
-| ------------- | ------------------ | ------ | ------------------------------------------------------ |
-| `development` | feature branch     | Squash | `Branch policy`, `Regression / test`, `Playwright e2e` |
-| `main`        | `development` only | Squash | Same                                                   |
+| Base          | Head               | Merge                      | Checks                                                 |
+| ------------- | ------------------ | -------------------------- | ------------------------------------------------------ |
+| `development` | feature branch     | **Rebase**                 | `Branch policy`, `Regression / test`, `Playwright e2e` |
+| `main`        | `development` only | **Squash** (auto-merge OK) | Same                                                   |
 
-## Squash merge settings
+## Squash merge settings (main)
 
-| Field                       | Value      |
-| --------------------------- | ---------- |
-| Allow squash merging        | yes (only) |
-| Squash merge commit title   | `PR_TITLE` |
-| Squash merge commit message | `BLANK`    |
+| Field                       | Value                   |
+| --------------------------- | ----------------------- |
+| Allow squash merging        | yes                     |
+| Allow rebase merging        | yes (for `development`) |
+| Allow merge commits         | no                      |
+| Allow auto-merge            | yes                     |
+| Squash merge commit title   | `PR_TITLE`              |
+| Squash merge commit message | `BLANK`                 |
 
-Apply with `npm run gh:setup-merge-settings`.
+Apply with `npm run gh:setup-merge-settings`. Per-branch method locks need rulesets (`npm run gh:setup-rulesets`).

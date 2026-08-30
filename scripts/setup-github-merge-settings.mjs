@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 /**
- * Squash-only merge settings: PR title subject, blank message body.
+ * Repo merge-button settings for lkwd-nuxt-tmpl.
+ *
+ * Policy (enforced per-branch via rulesets when available):
+ *   - development → rebase only
+ *   - main → squash + PR only (auto-merge squash allowed)
+ *
+ * Repo-level buttons must enable both squash and rebase; merge commits stay off.
  *
  * Usage:
  *   node scripts/setup-github-merge-settings.mjs
@@ -56,9 +62,11 @@ async function main() {
     '-F',
     'allow_squash_merge=true',
     '-F',
+    'allow_rebase_merge=true',
+    '-F',
     'allow_merge_commit=false',
     '-F',
-    'allow_rebase_merge=false',
+    'allow_auto_merge=true',
     '-F',
     'delete_branch_on_merge=true',
     '-f',
@@ -66,13 +74,14 @@ async function main() {
     '-f',
     `squash_merge_commit_message=${SQUASH_MERGE_MESSAGE}`,
     '--jq',
-    '{allow_squash_merge,allow_merge_commit,allow_rebase_merge,delete_branch_on_merge,squash_merge_commit_title,squash_merge_commit_message}',
+    '{allow_squash_merge,allow_rebase_merge,allow_merge_commit,allow_auto_merge,delete_branch_on_merge,squash_merge_commit_title,squash_merge_commit_message}',
   ]);
   if (patch.code !== 0) {
     throw new Error(patch.stderr || patch.stdout || 'failed to patch repository settings');
   }
   console.log(patch.stdout.trim());
-  console.log('✓ squash-only merges; PR title subject; blank squash body');
+  console.log('✓ squash + rebase enabled (no merge commits); auto-merge on; squash uses PR title + blank body');
+  console.log('  Per-branch: development=rebase only, main=squash PR-only (see gh:setup-rulesets)');
 }
 
 const isMain = process.argv[1] && path.resolve(fileURLToPath(import.meta.url)) === path.resolve(process.argv[1]);

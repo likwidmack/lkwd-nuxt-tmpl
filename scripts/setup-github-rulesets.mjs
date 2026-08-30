@@ -81,7 +81,7 @@ export function recommendedRulesets() {
             require_code_owner_review: false,
             require_last_push_approval: false,
             required_review_thread_resolution: false,
-            allowed_merge_methods: ['squash'],
+            allowed_merge_methods: ['rebase'],
           },
         },
         {
@@ -143,14 +143,14 @@ Manual GitHub Ruleset checklist (Settings → Rules → Rulesets)
 --------------------------------------------------------------
 1. development (name: devenv, include refs/heads/develop*)
    - Require a pull request before merging
-   - Allowed merge methods: Squash
+   - Allowed merge methods: Rebase only
    - Block force pushes / deletions
    - Required status checks (strict): "Branch policy", "Regression / test"
    - Admin bypass allowed
 
 2. main (include refs/heads/main)
-   - Require a pull request before merging
-   - Allowed merge methods: Squash only
+   - Require a pull request before merging (PR only)
+   - Allowed merge methods: Squash only (auto-merge squash OK)
    - Require conversation resolution
    - Block force pushes / deletions
    - Required status checks (strict): "Branch policy", "Regression / test", "Playwright e2e"
@@ -158,6 +158,7 @@ Manual GitHub Ruleset checklist (Settings → Rules → Rulesets)
 
 Private GitHub Free may not enable rulesets. Until they do, rely on
 .github/workflows/branch-policy.yml and the CI Branch policy job.
+Use rebase when merging into development; squash (+ auto-merge) into main.
 
 Do NOT leave unprotected direct push as the default path for development or main.
 `.trim();
