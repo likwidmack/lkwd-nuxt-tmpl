@@ -3,7 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Likwid Nuxt 4 GitHub template — Pug, SCSS, house tooling, dual agent surfaces.",
+  "description": "Likwid Nuxt 4 GitHub template with Pug, SCSS, SYS_ENV matrix, Vitest, Playwright, and dual agent surfaces.",
+  "keywords": [
+    "nuxt",
+    "nuxt4",
+    "vue",
+    "typescript",
+    "pug",
+    "scss",
+    "ssr",
+    "vitest",
+    "playwright",
+    "eslint",
+    "prettier",
+    "github-template",
+    "template",
+    "likwid"
+  ],
+  "homepage": "https://github.com/likwidmack/lkwd-nuxt-tmpl#readme",
+  "bugs": {
+    "url": "https://github.com/likwidmack/lkwd-nuxt-tmpl/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/likwidmack/lkwd-nuxt-tmpl.git"
+  },
+  "license": "MIT",
+  "author": "likwidmack <likwidmack@gmail.com> (https://github.com/likwidmack)",
   "engines": {
     "node": ">=26.5.0"
   },
