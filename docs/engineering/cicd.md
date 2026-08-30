@@ -5,19 +5,19 @@ Workflow topology for this template. Optional AWS CD stays in [`docs/overlays/aw
 ## Flow
 
 ```
-PR → development     → CI (Branch policy, Regression / test, Playwright e2e); merge with rebase
-PR → main            → same CI; head must be development; merge with squash (auto-merge OK)
-push → main|development → Branch policy workflow (reject unprotected direct pushes)
+PR → development     → CI; merge with squash or rebase (auto-squash OK)
+PR → main            → CI; head must be development; squash + auto-merge
+push → main|development → Branch policy workflow (PR-only; reject unprotected direct pushes)
 ```
 
-Default branch is `development`. Protect `main` with GitHub branch protection / rulesets when available (private Free does not; public or Pro does).
+Default branch is `development`. Protect both branches with rulesets when available (private Free does not; public or Pro does).
 
 ## Merge policy
 
-| Branch        | How to land changes                  | Merge method                                |
-| ------------- | ------------------------------------ | ------------------------------------------- |
-| `development` | Pull request                         | **Rebase only**                             |
-| `main`        | Pull request from `development` only | **Squash only** (auto-merge squash allowed) |
+| Branch        | Access                           | Merge methods                        |
+| ------------- | -------------------------------- | ------------------------------------ |
+| `development` | **PR only**                      | **Squash + rebase** (auto-squash OK) |
+| `main`        | **PR only** (from `development`) | **Squash + auto-merge**              |
 
 Merge commits are disabled repo-wide. Squash commit title/message: `PR_TITLE` / `BLANK`.
 
@@ -38,11 +38,11 @@ Required check **names** (rulesets / UI) must match job `name:` fields:
 
 ```bash
 npm run gh:setup-merge-settings          # squash + rebase buttons, auto-merge, no merge commits
-npm run gh:setup-rulesets                # dry-run + checklist (rebase on development, squash on main)
+npm run gh:setup-rulesets                # dry-run + checklist
 APPLY_RULESETS=1 npm run gh:setup-rulesets
 ```
 
-Private GitHub Free may not enable rulesets or classic branch protection. Until the plan does, enforce promotion with `branch-policy.yml` and the CI Branch policy job, and follow the merge methods above manually.
+Private GitHub Free may not enable rulesets, classic branch protection, or auto-merge. Until the plan does, enforce PR-only with `branch-policy.yml` / CI Branch policy, and follow the merge methods above manually.
 
 ## Agent rules
 

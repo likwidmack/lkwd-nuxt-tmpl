@@ -3,10 +3,10 @@
  * Repo merge-button settings for lkwd-nuxt-tmpl.
  *
  * Policy (enforced per-branch via rulesets when available):
- *   - development → rebase only
- *   - main → squash + PR only (auto-merge squash allowed)
+ *   - development → PR only; squash + rebase (auto-squash OK)
+ *   - main → PR only; auto-merge (squash)
  *
- * Repo-level buttons must enable both squash and rebase; merge commits stay off.
+ * Repo-level: squash + rebase on, merge commits off, auto-merge on.
  *
  * Usage:
  *   node scripts/setup-github-merge-settings.mjs
@@ -81,7 +81,9 @@ async function main() {
   }
   console.log(patch.stdout.trim());
   console.log('✓ squash + rebase enabled (no merge commits); auto-merge on; squash uses PR title + blank body');
-  console.log('  Per-branch: development=rebase only, main=squash PR-only (see gh:setup-rulesets)');
+  console.log(
+    '  Per-branch: development=PR + squash/rebase (auto-squash); main=PR + auto-merge squash (see gh:setup-rulesets)'
+  );
 }
 
 const isMain = process.argv[1] && path.resolve(fileURLToPath(import.meta.url)) === path.resolve(process.argv[1]);
